@@ -44,12 +44,16 @@ const ChatPanel: React.FC<Props> = ({ socket }) => {
   return (
     <div className="flex flex-col h-full border-l border-gray-300 dark:border-gray-700">
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
-        {messages.map((m) => (
-          <div key={m._id} className="text-sm">
-            <span className="font-semibold mr-1">{m.senderId}:</span>
-            <span>{m.content}</span>
-          </div>
-        ))}
+        {messages.map((m) => {
+          const sender: any = m.senderId as any;
+          const display = typeof sender === "object" && sender?.name ? sender.name : sender;
+          return (
+            <div key={m._id} className="text-sm">
+              {display && <span className="font-semibold mr-1">{display}:</span>}
+              <span>{m.content}</span>
+            </div>
+          );
+        })}
         <div ref={bottomRef} />
       </div>
       <form onSubmit={handleSend} className="p-3 border-t dark:border-gray-700">

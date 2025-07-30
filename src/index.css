@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
+
+/* Global text color */
+body {
+  @apply text-black dark:text-gray-300;
+}
+
+/* darker placeholder */
+input::placeholder, textarea::placeholder {
+  @apply text-black dark:text-gray-400;
+} 
